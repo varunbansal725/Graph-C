@@ -63,11 +63,18 @@ void BFS(int i) {
     queue.size=n;
     queue.rear=queue.front=-1;
     queue.q=(int *)malloc((queue.size)*sizeof(int));
+    
+    /* printing & visiting the starting index & pushing the starting index to the initialised queue */
     printf("%d ", i);
     visited[i]=1;
     enqueue(&queue, i);
 
     while(!isEmpty(queue)) {
+    
+    /* getting the last popped element from queue & finding the joined vertices to that popped vertex. if there are vertices joined to that popped vertex & are 
+    not yet visited, they are printed & visited */
+    
+    
         x=dequeue(&queue);
         for(y=1; y<=n; y++) {
             if(edges[x][y]==1 && visited[y]==0) {
