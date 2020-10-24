@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define n 7
+
+int edges[8][8]={{0,0,0,0,0,0,0,0},
+                {0,0,1,1,1,0,0,0},
+                {0,1,0,1,0,0,0,0},
+                {0,1,1,0,1,1,0,0},
+                {0,1,0,1,0,1,0,0},
+                {0,0,0,1,1,0,1,1},
+                {0,0,0,0,0,1,0,0},
+                {0,0,0,0,0,1,0,0}};
+
+int visited[8]={0};
+
+struct Queue {
+    int size;
+    int front;
+    int rear;
+    int *q;
+};
+
+void enqueue(struct Queue *queue, int element) {
+     if(queue->rear==queue->size-1)
+        printf("Queue is already full\n");
+     else {
+        queue->rear++;
+        queue->q[queue->rear] = element;
+     }
+}
+
+int dequeue(struct Queue *queue) {
+    int x;
+    if(queue->front==queue->rear)
+        printf("Queue is empty\n");
+    else {
+        queue->front++;
+        x = queue->q[queue->front];
+    }
+        return x;
+
+}
+
+
+int isFull(struct Queue queue) {
+    if(queue.rear==queue.size-1)
+        return 1;
+    else
+        return 0;
+}
+
+int isEmpty(struct Queue queue) {
+    if(queue.rear==queue.front)
+        return 1;
+    else
+        return 0;
+}
+
+void BFS(int i) {
+    int x,y;
+    struct Queue queue;
+    queue.size=n;
+    queue.rear=queue.front=-1;
+    queue.q=(int *)malloc((queue.size)*sizeof(int));
+    printf("%d ", i);
+    visited[i]=1;
+    enqueue(&queue, i);
+
+    while(!isEmpty(queue)) {
+        x=dequeue(&queue);
+        for(y=1; y<=n; y++) {
+            if(edges[x][y]==1 && visited[y]==0) {
+                printf("%d ", y);
+                visited[y]=1;
+                enqueue(&queue, y);
+            }
+        }
+    }
+}
+
+
+void main()
+{
+        BFS(5);
+}
