@@ -18,9 +18,13 @@ int visited[8]={0};
 void DFS(int start) {
 
     int j;
+    /* printing the starting index and visiting it */
+    
     if(visited[start]==0) {
         printf("%d ", start);
         visited[start]=1;
+        
+        /* after printing and visiting the starting index, exploring only the next joined vertex
     for(j=start; j<=n; j++) {
             if(edges[start][j]==1)
                 DFS(j);
